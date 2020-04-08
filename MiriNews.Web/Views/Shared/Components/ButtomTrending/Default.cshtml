@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TrendingViewModel>
+<div class="trending-bottom">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4">
+                <div class="single-bottom mb-35">
+                    <div class="trend-bottom-img mb-30">
+                        <img src="~/@item.CoverPhoto" width="240" height="160" alt="">
+                    </div>
+                    <div class="trend-bottom-cap">
+                        <span class="color1">@item.CategoryName</span>
+                        <h4><a href="details.html">@item.Title</a></h4>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
