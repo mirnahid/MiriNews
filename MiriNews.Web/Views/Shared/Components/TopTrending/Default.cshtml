@@ -4,7 +4,7 @@
         <img src="~/@Model.CoverPhoto" width="750" height="400" alt="">
         <div class="trend-top-cap">
             <span>@Model.CategoryName</span>
-            <h2><a href="details.html">@Model.Title</a></h2>
+            <h4><a asp-controller="News" asp-action="Details" asp-route-id="@Model.Id" >@Model.Title</a></h4>
         </div>
     </div>
 </div>

@@ -1,0 +1,177 @@
+﻿@model NewsDetailViewModel
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="about-area">
+    <div class="container">
+        <!-- Hot Aimated News Tittle-->
+
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Trending Tittle -->
+                <div class="about-right mb-90">
+                    <div class="about-img">
+                        <img src="~/@Model.CoverPhoto" width="750" height="400" alt="">
+                        <div class="tools-panel">
+                            <div class="row">
+                                <div class="col" id="content-news">
+                                    <div class="date-down"><i class="fa fa-eye"></i> @Model.Views</div>
+                                    <div class="date-down"> @Model.PublishDate.ToString("dddd, dd MMMM yyyy")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-tittle mb-30 pt-30">
+                        <h3>@Model.Title</h3>
+                    </div>
+                    <div class="about-prea">
+                        @Html.Raw(Model.Description)
+                    </div>
+
+
+                    <div class="social-share pt-30">
+                        <div class="section-tittle">
+                            <h3 class="mr-20">Paylaş:</h3>
+                            <ul>
+                                <li><a href="#"><img src="~/img/news/icon-ins.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/img/news/icon-fb.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/img/news/icon-tw.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/img/news/icon-yo.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- From -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form class="form-contact contact_form mb-80" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mesajınızı qeyd edin'" placeholder="Mesajınızı qeyd edin"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control error" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adınızı qeyd edin'" placeholder="Adınızı qeyd edin">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control error" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email adresinizi qeyd edin'" placeholder="Email adresinizi qeyd edin">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input class="form-control error" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Başlığı qeyd edin'" placeholder="Başlığı qeyd edin">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="button button-contactForm boxed-btn">Göndər</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Section Tittle -->
+                <div class="section-tittle mb-40">
+                    <h3>Bizi izlə</h3>
+                </div>
+                <!-- Flow Socail -->
+                <div class="single-follow mb-45">
+                    <div class="single-box">
+                        <div class="follow-us d-flex align-items-center">
+                            <div class="follow-social">
+                                <a href="#"><img src="~/img/news/icon-fb.png" alt=""></a>
+                            </div>
+                            <div class="follow-count">
+                                <span>8,045</span>
+                                <p>izləyici</p>
+                            </div>
+                        </div>
+                        <div class="follow-us d-flex align-items-center">
+                            <div class="follow-social">
+                                <a href="#"><img src="~/img/news/icon-tw.png" alt=""></a>
+                            </div>
+                            <div class="follow-count">
+                                <span>8,045</span>
+                                <p>izləyici</p>
+                            </div>
+                        </div>
+                        <div class="follow-us d-flex align-items-center">
+                            <div class="follow-social">
+                                <a href="#"><img src="~/img/news/icon-ins.png" alt=""></a>
+                            </div>
+                            <div class="follow-count">
+                                <span>8,045</span>
+                                <p>izləyici</p>
+                            </div>
+                        </div>
+                        <div class="follow-us d-flex align-items-center">
+                            <div class="follow-social">
+                                <a href="#"><img src="~/img/news/icon-yo.png" alt=""></a>
+                            </div>
+                            <div class="follow-count">
+                                <span>8,045</span>
+                                <p>izləyici</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Poster -->
+                <div class="news-poster d-none d-lg-block">
+                    <img src="~/img/news/news_card.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="section-tittle mb-30">
+                            <h3>Oxşar Xəbərlər</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Nav Card -->
+                        <div class="tab-content" id="nav-tabContent">
+                            <!-- card one -->
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="whats-news-caption">
+                                    <div class="row">
+                                        @foreach (var item in Model.RelatedNews)
+                                        {
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="single-what-news mb-100">
+                                                    <div class="what-img">
+                                                        <img src="~/@item.CoverPhoto" width="360" height="335" alt="">
+                                                    </div>
+                                                    <div class="what-cap">
+                                                        <span class="color1">@item.CategoryName</span>
+                                                        <h4><a asp-controller="news" asp-action="details" asp-route-id="@item.Id">@item.Title</a></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Nav Card -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

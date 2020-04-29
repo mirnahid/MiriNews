@@ -1,0 +1,139 @@
+﻿@model IEnumerable<UserListViewModel>
+@{
+    ViewData["Title"] = "Editor siyahı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Datatables -->
+<link href="~/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Editorlar<small>Siyahı</small><a asp-controller="users" asp-action="adduser" class="btn  btn-primary">Yeni</a>  </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content" style="display: block;">
+
+            <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+                <div class="col-sm-12">
+                    <table id="niko" class="table table-striped table-bordered dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="datatable_info">
+                        <thead>
+                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 0px;">Rol</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 0px;">İstifadəçi adı</th><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 0px;">Adı</th><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 0px;">Soyadı</th><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 0px;">Post sayısı</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 0px;"></th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                            <tr role="row" class="odd" id="@item.Id">
+
+
+                                <td class="sorting_1">Editor</td>
+                                <td class="sorting_1">@item.UserName</td>
+                                <td class="sorting_1">@item.FirstName</td>
+                                <td class="sorting_1">@item.LastName</td>
+                                <td class="sorting_1"> <a asp-controller="news" asp-action="usernews" asp-route-id="@item.Id">@item.AddPosts</a> </td>
+                                <td>
+                                    <a asp-controller="users" asp-action="updateuser" asp-route-id="@item.Id" class="fa fa-pencil-square">redaktə et</a>
+                                    <br />
+                                    <a id="@item.Id" href="#" class="fa fa-remove">sil</a>
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('#niko').DataTable({
+                    "language": {
+                        "lengthMenu": "Səhifədə _MENU_ nəticə göstər",
+                        "search":"Axtar",
+                        "zeroRecords": "Nəticə tapılmadı",
+                        "info": "_TOTAL_ nəticədən _PAGE_ - _PAGES_ arası nəticələr",
+                        "infoEmpty": "nəticə yoxdur",
+                        "infoFiltered": "( _MAX_ nəticə içindən tapılanlar)",
+                        "paginate": {
+                            "sFirst": "İlk",
+                            "sLast": "Axırıncı",
+                            "sNext": "Sonraki",
+                            "sPrevious": "Öncəki"
+                        }
+                    },
+                    "order": [[0, 'asc']]
+
+
+                });
+                $(document).on("click", ".fa-remove", function () {
+                    var id = $(this).attr("id");
+                    swal({
+                        title: "Diqqət!",
+                        text: "Silmək istədiyinizə əminsiniz?",
+                        type: "info",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        confirmButtonText: "Bəli",
+                        cancelButtonText: "Xeyr, Ləğv et!"
+                    }, function () {
+
+                        $.ajax({
+                            url: '/admin/users/deleteuser',
+                            type: 'POST',
+                            data: {
+                                Id: id
+                            },
+                            success: function (result) {
+                                if (result.status) {
+                                    $('table#niko tr#' + id).remove();
+                                    swal({
+                                        title: "Uğurlu!",
+                                        text: "Silindi!",
+                                        type: "success"
+                                    });
+                                } else {
+                                    swal({
+                                        title: "Uğursuz!",
+                                        text: "Dəyişikliklər yerinə yetirilmədi!",
+                                        type: "error"
+                                    });
+                                }
+                            },
+                            error: function (result) {
+                                swal({
+                                    title: "Uğursuz!",
+                                    text: "Dəyişikliklər yerinə yetirilmədi!",
+                                    type: "error"
+                                });
+                            }
+                        });
+                    });
+                });
+
+            });
+    </script>
+}
+

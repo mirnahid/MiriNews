@@ -11,5 +11,6 @@ namespace MiriNews.Core.Entity.IdentityCore
         public DateTime DateOfBrith { get; set; }
         public ICollection<Post> AddedPosts { get; set; }
         public ICollection<Post> UpdatedPost { get; set; }
+        
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using MiriNews.Web.Areas.Admin.Models;
-using System;
+using MiriNews.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MiriNews.Web.Filters
 {
@@ -23,9 +21,17 @@ namespace MiriNews.Web.Filters
                 {
                     model.Errors.Add(x.ErrorMessage);
                 });
+
+                //context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                //{
+                //    controller = "Home",
+                //    action = "Error"
+
+
+                //}));
                 context.Result = new BadRequestObjectResult(model);
             }
-            
+
         }
     }
 }

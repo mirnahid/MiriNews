@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MiriNews.Core.Entity;
-using System;
+using MiriNews.Core.Entity.IdentityCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MiriNews.Web.Areas.Admin.Models
 {
@@ -24,5 +22,7 @@ namespace MiriNews.Web.Areas.Admin.Models
         public Category Category { get; set; }
         [Required(ErrorMessage ="Kateqoriyanı seçin")]
         public int catId { get; set; }
+
+        public ApplicationUser  AddUser { get; set; }
     }
 }

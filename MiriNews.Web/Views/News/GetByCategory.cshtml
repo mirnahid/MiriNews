@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TrendingViewModel>
+@{
+    ViewData["Title"] = "Kateqoriyalar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="about-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="section-tittle mb-30">
+                            <h3>Kateqoriyaya görə xəbərlər</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Nav Card -->
+                        <div class="tab-content" id="nav-tabContent">
+                            <!-- card one -->
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="whats-news-caption">
+                                    <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="single-what-news mb-100">
+                                                    <div class="what-img">
+                                                        <img src="~/@item.CoverPhoto" width="360" height="335" alt="">
+                                                    </div>
+                                                    <div class="what-cap">
+                                                        <span class="color1">@item.CategoryName</span>
+                                                        <h4><a asp-controller="news" asp-action="details" asp-route-id="@item.Id">@item.Title</a></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Nav Card -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

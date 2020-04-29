@@ -23,7 +23,7 @@ namespace MiriNews.Web.Components
         public IViewComponentResult Invoke()
         {
             var model = _unitOfWork.GetRepository<Post>()
-                .Find(x => x.ButtomTrending == true)
+                .Find(x => x.TopTrending == true)
                 .OrderByDescending(x => x.PublishDate)
                 .Include(x => x.Category)
                 .Select(x => new TrendingViewModel

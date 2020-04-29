@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +12,12 @@ using MiriNews.Data.Repositories;
 using MiriNews.Data.UnitOfWorks;
 using MiriNews.Service.Services;
 using AutoMapper;
+using MiriNews.Core.Entity.IdentityCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MiriNews.Web.Filters;
+using MiriNews.Web.WatherApiService;
+using System;
 
 namespace MiriNews.Web
 {
@@ -33,18 +33,69 @@ namespace MiriNews.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
-            services.AddDbContext<MiriContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), o => o.MigrationsAssembly("MiriNews.Data")));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddControllersWithViews(x=> 
+
+            services.AddHttpClient<WeatherApi>(options =>
             {
-                x.Filters.Add(new ValidationFilter());
+                options.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+
+            services.AddScoped<PostNotFoundFilter>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddDbContext<MiriContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), o => o.MigrationsAssembly("MiriNews.Data")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
+            {
+                 config.Stores.MaxLengthForKeys = 128;
+                 config.Password.RequireDigit = false;
+                 config.Password.RequireLowercase = false;
+                 config.Password.RequiredLength = 4;
+                 config.Password.RequiredUniqueChars = 0;
+                 config.Password.RequireLowercase = false;
+                 config.Password.RequireNonAlphanumeric = false;
+                 config.Password.RequireUppercase = false;                      
+                
+            })
+              .AddEntityFrameworkStores<MiriContext>()
+              .AddDefaultTokenProviders();
+
+            services.AddSession();
+
+            services.ConfigureApplicationCookie(configure =>
+            {
+                configure.Cookie.HttpOnly = true;
+
+                configure.Cookie.IsEssential = true;
+
+                configure.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+
+                configure.LoginPath = "/admin/account/login";          
+                
+                configure.LogoutPath= "/admin/account/logout";
+
+                //configure.Cookie = new CookieBuilder
+                //{
+                //    IsEssential = true
+                //};
+            });
+
+            services.AddControllersWithViews()
+                .AddSessionStateTempDataProvider();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -53,14 +104,23 @@ namespace MiriNews.Web
             }
             else
             {
+                //extension method  bug var hell olunmalidi
+
+
+                //app.UseCustomException();
+
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseSession();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -72,7 +132,7 @@ namespace MiriNews.Web
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");             
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 

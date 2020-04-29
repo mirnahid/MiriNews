@@ -1,0 +1,14 @@
+﻿@model WeatherApiViewModel
+    <ul>
+        @try
+        {
+            <li><img src="~/img/icon/header_icon1.png" alt="">@Model.location.name @Model.current.temp_c, @Model.current.condition.text  </li>
+        }
+        catch (Exception)
+        {
+
+            
+        }
+
+        <li>@DateTime.Now.ToString("dddd, dd MMMM yyyy")</li>
+    </ul>

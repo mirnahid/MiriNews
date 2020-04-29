@@ -299,8 +299,8 @@ namespace MiriNews.Data.Migrations
 
                     b.Property<string>("CoverPhoto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -317,14 +317,17 @@ namespace MiriNews.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<bool>("TopTrending")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdateUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Views")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

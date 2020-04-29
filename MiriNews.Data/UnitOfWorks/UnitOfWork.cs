@@ -1,12 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using MiriNews.Core.Respositories;
-using MiriNews.Core.Services;
 using MiriNews.Core.UnitOfWorks;
 using MiriNews.Data.Repositories;
-using MiriNews.Service.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MiriNews.Data.UnitOfWorks
@@ -54,6 +50,7 @@ namespace MiriNews.Data.UnitOfWorks
                 }
                 catch (Exception ex)
                 {
+                    
                     transaction.Rollback();
                     throw new ArgumentException("Error on savechanges", ex);
                 }

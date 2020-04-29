@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiriNews.Core.Respositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MiriNews.Data.Repositories
@@ -35,7 +33,7 @@ namespace MiriNews.Data.Repositories
             return  _dbSet.Where(predicate);
         }
 
-        public IQueryable<TEntity> GetAllAsync()
+        public IQueryable<TEntity> GetAll()
         {
             return _dbSet;
         }

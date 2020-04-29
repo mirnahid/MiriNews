@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MiriNews.Core.Entity
+﻿namespace MiriNews.Core.Entity
 {
     public class Tag
     {

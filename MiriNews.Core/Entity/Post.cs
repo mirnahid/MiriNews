@@ -14,6 +14,7 @@ namespace MiriNews.Core.Entity
         public bool TopTrending { get; set; }
         public bool ButtomTrending { get; set; }
         public bool RightContent { get; set; }
+        public int Views { get; set; }
         public DateTime PublishDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; }
 

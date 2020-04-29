@@ -9,10 +9,18 @@ namespace MiriNews.Data.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(x => x.CategoryName).IsRequired().HasMaxLength(50);
-            builder.HasMany(x => x.Posts).WithOne(x => x.Category)
+
+            builder.Property(x => x.Id)
+                .UseIdentityColumn();
+
+            builder.Property(x => x.CategoryName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.HasMany<Post>(x => x.Posts)
+                .WithOne(x => x.Category)
                 .HasForeignKey(x => x.CategoryId);
+
             builder.ToTable("Categories");
         }
     }

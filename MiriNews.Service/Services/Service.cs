@@ -2,7 +2,6 @@
 using MiriNews.Core.Services;
 using MiriNews.Core.UnitOfWorks;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -37,9 +36,9 @@ namespace MiriNews.Service.Services
             return  _repository.Find(predicate);
         }
 
-        public  IQueryable<TEntity> GetAllAsync()
+        public  IQueryable<TEntity> GetAll()
         {
-            return  _repository.GetAllAsync();
+            return  _repository.GetAll();
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
@@ -56,7 +55,7 @@ namespace MiriNews.Service.Services
         public void RemoveRange(IQueryable<TEntity> entities)
         {
             _repository.RemoveRange(entities);
-            _unitOfWork.CommitAsync();
+            _unitOfWork.Commit();
         }
 
         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)

@@ -8,7 +8,7 @@
                 </div>
                 <div class="trand-right-cap">
                     <span class="color1">@item.CategoryName</span>
-                    <h4><a href="details.html">@item.Title</a></h4>
+                    <h4><a asp-controller="News" asp-action="Details" asp-route-id="@item.Id"> @item.Title</a></h4>
                 </div>
             </div>
         }

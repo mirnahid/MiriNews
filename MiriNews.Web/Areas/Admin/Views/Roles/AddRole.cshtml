@@ -1,0 +1,47 @@
+﻿@model AddRoleViewModel
+@{
+    ViewData["Title"] = "Rol əlavə et";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" asp-controller="roles" asp-action="addrole" asp-area="admin" method="post" enctype="multipart/form-data" novalidate="">
+
+                        <span class="section">Rol Əlavə Et</span>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="item form-group ">
+                            <label>
+                                Rol adı
+                            </label>
+                            <div class="col-md-5 col-sm-5">
+                                <input id="name" class="form-control" asp-for="Name" type="text" required="">
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 offset-md-3">
+                                <a asp-controller="roles" asp-action="rolelist" class="btn btn-primary">Geriyə</a>
+                                <button id="send" type="submit" class="btn btn-success">Yadda Saxla</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

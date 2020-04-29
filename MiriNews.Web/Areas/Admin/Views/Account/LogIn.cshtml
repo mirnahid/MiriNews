@@ -1,0 +1,75 @@
+﻿@model LogInViewModel
+@{
+    Layout = null;
+    var returnUrl = @Context.Request.Query["returnurl"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Daxil ol </title>
+
+    <!-- Bootstrap -->
+    <link href="~/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/admin/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/admin/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="login">
+    <div>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form method="post" asp-controller="Account" asp-action="LogIn" asp-area="admin">
+                        <h1>Daxil ol</h1>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div>
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                            <input asp-for="UserName" type="text" class="form-control" placeholder="email"  />
+                        </div>
+                        <div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="şifrə"  />
+                        </div>
+                        <div>
+                            <button id="send" type="submit" class="btn btn-success">Daxil ol</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-paw"></i> MiriNews</h1>
+                                <p>©2020 All Rights Reserved</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>
+@*<partial name="_ValidationScriptsPartial" />*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@ViewData["Title"] |MiriNews </title>
+    <title>@ViewData["Title"] | MiriNews </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -27,16 +27,16 @@
 <body>
 
     <!-- Preloader Start -->
-    <!-- <div id="preloader-active">
+    <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="~/img/logo/logo.png" alt="">
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Preloader Start -->
 
     <header>
@@ -48,10 +48,7 @@
                         <div class="col-xl-12">
                             <div class="row d-flex justify-content-between align-items-center">
                                 <div class="header-info-left">
-                                    <ul>
-                                        <li><img src="~/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
-                                        <li><img src="~/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
-                                    </ul>
+                                    @await Component.InvokeAsync("Weather")
                                 </div>
                                 <div class="header-info-right">
                                     <ul class="header-social">
@@ -70,7 +67,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="index.html"><img src="~/img/logo/logo.png" alt=""></a>
+                                    <a asp-controller="Home" asp-action="Index"><img src="~/img/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -87,26 +84,23 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="~/img/logo/logo.png" alt=""></a>
+                                    <a asp-controller="Home" asp-action="Index"><img src="~/img/logo/logo.png" alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
-                                <div class="main-menu d-none d-md-block">
+                                <div class="main-menu d-none d-md-block  ">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Əsas Səhifə</a></li>
-                                            <li><a href="categori.html">Kategoriyalar</a></li>
-                                            <li><a href="about.html">Haqqımızda</a></li>
-                                            <li><a href="latest_news.html">Son Xəbərlər</a></li>
-                                            <li><a href="contact.html">Əlaqə</a></li>
-                                            <li>
-                                                <a href="#">Pages</a>
-                                                <ul class="submenu">
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-blog.html">Blog Details</a></li>
-                                                    <li><a href="details.html">Categori Details</a></li>
-                                                </ul>
-                                            </li>
+                                            @*<li><a asp-controller="Home" asp-action="Index">Əsas Səhifə</a></li>*@
+
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="3">siyasi</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="4">İdman</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="7">cəmiyyət</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="11">mədəniyyət</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="5">texnologiya</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="8">şou-biznes</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="10">kriminal</a></li>
+                                            <li><a asp-controller="news" asp-action="getbycategory" asp-route-id="9">müharibə</a></li>
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -131,11 +125,27 @@
                 </div>
             </div>
         </div>
-        <!-- Header End -->
+        <!-- Hot Aimated News Tittle-->
+        <div class="trending-area fix">
+            <div class="container">
+                <div class="trending-main">
+
+                    @await Component.InvokeAsync("TrendingNow")
+
+
+                </div>
+            </div>
+        </div>
+        @*<div class="container">
+
+
+            </div>*@
+
     </header>
+    <!-- Header End -->
     @RenderBody()
 
-    
+
 
     <footer>
         <!-- Footer Start-->
@@ -151,7 +161,12 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales  Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida sodales  Suscipit mauris pede for sectetuer.</p>
+                                        <p>
+
+                                            MiriNews 24 saat ərzində, Azərbaycan və rus dillərində, ölkədə və dünyada baş verən ən aktual və maraqlı hadisələr barədə operativ xəbərlər, oxucuları və cəmiyyəti maraqlandıran suallara cavablar, analitik məqalələr, foto və videohesabatlar hazırlayır.
+
+                                            Düzgün seçilmiş informasiya siyasəti, müasir dizaynı, mobil platformalarda və aparıcı sosial şəbəkələrdə təmsil olunması nəticəsində bu gün MiriNews Azərbaycanın media məkanında öz layiqli yerini tutub və ən geniş oxucu auditoriyasına malik xəbər portallarından birinə çevrilib.
+                                        </p>
                                     </div>
                                 </div>
                                 <!-- social -->
@@ -171,8 +186,7 @@
                                 <!-- Form -->
                                 <div class="footer-form">
                                     <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                              method="get" class="subscribe_form relative mail_part">
+                                        <form target="_blank">
                                             <input type="email" name="email" id="newsletter-form-email" placeholder="Email Adresi"
                                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
                                                    onblur="this.placeholder = ' Email Address '">
@@ -229,7 +243,8 @@
                                 <ul>
                                     <li><a href="#">İstifadə Qaydaları</a></li>
                                     <li><a href="#">Gizlilik Politikası</a></li>
-                                    <li><a href="#">Əlaqə</a></li>
+                                    <li><a asp-controller="home" asp-action="about">Haqqımızda</a></li>
+                                    <li><a asp-controller="home" asp-action="contact">Əlaqə</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -264,7 +279,7 @@
     <script src="~/js/jquery.ticker.js"></script>
     <script src="~/js/site.js"></script>
 
-    <!-- Scrollup, nice-select, sticky -->
+    @*Scrollup, nice-select, sticky*@
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.nice-select.min.js"></script>
     <script src="~/js/jquery.sticky.js"></script>

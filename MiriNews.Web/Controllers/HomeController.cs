@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MiriNews.Core.Entity;
-using MiriNews.Core.Services;
 using MiriNews.Core.UnitOfWorks;
 using MiriNews.Web.Models;
 
@@ -34,9 +28,21 @@ namespace MiriNews.Web.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(ErrorViewModel model)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            model.RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+
+            return View(model);
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
         }
     }
 }
