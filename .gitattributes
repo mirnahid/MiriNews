@@ -2,11 +2,11 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 * text=auto
-*.css linguist-detectable=false
+
 
 ###############################################################################
 # Set default behavior for command prompt diff.
-#
+*.css linguist-detectable=false
 # This is need for earlier builds of msysgit that does not have it on by
 # default for csharp files.
 # Note: This is only used by command line
